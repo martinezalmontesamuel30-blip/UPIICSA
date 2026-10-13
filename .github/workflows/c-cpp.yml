@@ -13,8 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
+    - name: Compilar Holamundo
+      run: g++ -o Holamundo Codigos/Holamundo.c
     - name: make
       run: make
     - name: make check
