@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Compilar programa
-      run: g++ main.cpp -o programa
+      run: g++ Holamundo.c -o programa
 
     - name: Ejecutar programa
       run: ./programa
