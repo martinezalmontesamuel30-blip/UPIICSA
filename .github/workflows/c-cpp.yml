@@ -1,16 +1,52 @@
-name: C CI
+name: Compilar C y C++
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - "Codigos/**/*.c"
+      - "Codigos/**/*.cpp"
+      - ".github/workflows/c-cpp.yml"
+  pull_request:
+    paths:
+      - "Codigos/**/*.c"
+      - "Codigos/**/*.cpp"
+      - ".github/workflows/c-cpp.yml"
+  workflow_dispatch:
 
 jobs:
-  build:
+  compilar:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
 
-    - name: Compilar con Make
-      run: make
+      - name: Compilar programas C
+        shell: bash
+        run: |
+          encontrados=0
 
-    - name: Ejecutar programa
-      run: ./programa
+          while IFS= read -r -d '' archivo; do
+            encontrados=1
+            echo "Compilando C: $archivo"
+            gcc -Wall -Wextra -pedantic "$archivo" -o /tmp/programa
+          done < <(find Codigos -type f -name '*.c' -print0)
+
+          if [ "$encontrados" -eq 0 ]; then
+            echo "No se encontraron archivos .c"
+          fi
+
+      - name: Compilar programas C++
+        shell: bash
+        run: |
+          encontrados=0
+
+          while IFS= read -r -d '' archivo; do
+            encontrados=1
+            echo "Compilando C++: $archivo"
+            g++ -Wall -Wextra -pedantic "$archivo" -o /tmp/programa
+          done < <(find Codigos -type f -name '*.cpp' -print0)
+
+          if [ "$encontrados" -eq 0 ]; then
+            echo "No se encontraron archivos .cpp"
+          fi
