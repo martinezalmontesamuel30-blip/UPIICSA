@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: C CI
 
 on: [push, pull_request]
 
@@ -9,11 +9,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Configurar con CMake
-      run: cmake -S . -B build
-
-    - name: Compilar proyecto
-      run: cmake --build build
+    - name: Compilar con Make
+      run: make
 
     - name: Ejecutar programa
-      run: ./build/programa
+      run: ./programa
