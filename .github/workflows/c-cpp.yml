@@ -9,8 +9,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Compilar programa
-      run: g++ Codigos/Primer semestre/Holamundo.c -o programa
+    - name: Configurar con CMake
+      run: cmake -S . -B build
+
+    - name: Compilar proyecto
+      run: cmake --build build
 
     - name: Ejecutar programa
-      run: ./programa
+      run: ./build/programa
