@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Compilar Holamundo
-      run: g++ -o Holamundo Codigos/Holamundo.c
+      run: g++ -o Holamundo Codigos/Primer semestre/Holamundo.c
     - name: make
       run: make
     - name: make check
