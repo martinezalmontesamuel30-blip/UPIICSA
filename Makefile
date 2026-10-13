@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -g
 
-# Lista tus archivos fuente aquí
-SRCS = main.c funciones.c otra_archivo.c
+# Reemplaza main.c por el nombre real de tu archivo
+SRCS = Holamundo.c
 OBJS = $(SRCS:.c=.o)
 TARGET = programa
 
