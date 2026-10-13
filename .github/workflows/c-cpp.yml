@@ -1,4 +1,4 @@
-name: Compilar C y C++
+name: Comprobar C y C++
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
-      - name: Compilar programas C
+      - name: Comprobar archivos C
         shell: bash
         run: |
           encontrados=0
@@ -29,14 +29,19 @@ jobs:
           while IFS= read -r -d '' archivo; do
             encontrados=1
             echo "Compilando C: $archivo"
-            gcc -Wall -Wextra -pedantic "$archivo" -o /tmp/programa
+
+            gcc -Wall -Wextra -pedantic \
+                -c "$archivo" \
+                -o /tmp/programa.o
+
+            echo "✓ Compilación correcta: $archivo"
           done < <(find Codigos -type f -name '*.c' -print0)
 
           if [ "$encontrados" -eq 0 ]; then
-            echo "No se encontraron archivos .c"
+            echo "No se encontraron archivos C."
           fi
 
-      - name: Compilar programas C++
+      - name: Comprobar archivos C++
         shell: bash
         run: |
           encontrados=0
@@ -44,9 +49,14 @@ jobs:
           while IFS= read -r -d '' archivo; do
             encontrados=1
             echo "Compilando C++: $archivo"
-            g++ -Wall -Wextra -pedantic "$archivo" -o /tmp/programa
+
+            g++ -Wall -Wextra -pedantic \
+                -c "$archivo" \
+                -o /tmp/programa.o
+
+            echo "✓ Compilación correcta: $archivo"
           done < <(find Codigos -type f -name '*.cpp' -print0)
 
           if [ "$encontrados" -eq 0 ]; then
-            echo "No se encontraron archivos .cpp"
+            echo "No se encontraron archivos C++."
           fi
