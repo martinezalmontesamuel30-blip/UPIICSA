@@ -1,4 +1,16 @@
-- name: Configure
-  run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-- name: Build
-  run: cmake --build build -- -j"$(nproc)"
+name: C/C++ CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Compilar programa
+      run: g++ main.cpp -o programa
+
+    - name: Ejecutar programa
+      run: ./programa
