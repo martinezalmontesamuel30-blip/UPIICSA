@@ -39,7 +39,7 @@ void mostrar() const {
 }
 };
 
-int main() {
+int main(){
     Lista e;
     int opcion;
     while(true) {
@@ -60,3 +60,4 @@ int main() {
             else cout<<"Opcion no valida\n";
         } catch(const exception& ex) { cout<<ex.what()<<"\n"; }
     }
+}
